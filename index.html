@@ -4,28 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Cambria', sans-serif;
+        }
+
+        .project-presentation {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .team-members, .project-description {
+            margin-top: 50px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Futura', sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        h3 {
+            font-size: 1.5em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #fff;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #302b63;
+        }
+
+        tr:nth-child(even) {
+            background-color: #24243e;
+        }
+    </style>
 </head>
 <body>
-    <h1>Exercice 1</h1>
-    <h2>Ligne de temps faite avec WikiData</h2>
-    <div style="border: 2px solid black;">
-        <p>La requete est   : </p>
-        <code style="color: red;">
-            SELECT ?peintre ?date_de_naissance ?lieu_de_naissance ?lieu_de_naissanceLabel ?image WHERE {<br>
-                SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } <br>
-                
-                OPTIONAL {  } <br>
-                
-                OPTIONAL { ?peintre wdt:P569 ?date_de_naissance. } <br>
-                OPTIONAL { ?peintre wdt:P19 ?lieu_de_naissance. } <br>
-                OPTIONAL {  } <br>
-                OPTIONAL {  } <br>
-                OPTIONAL { ?peintre wdt:P18 ?image. } <br>
-                ?peintre wdt:P106 wd:Q1028181. <br>
-              } <br>
-              LIMIT 100 <br>
-        </code>
-        <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Fpeintre%20%3Fdate_de_naissance%20%3Flieu_de_naissance%20%3Flieu_de_naissanceLabel%20%3Fimage%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20OPTIONAL%20%7B%20%20%7D%0A%20%20%3Fpeintre%20wdt%3AP106%20wd%3AQ1028181.%0A%20%20OPTIONAL%20%7B%20%3Fpeintre%20wdt%3AP569%20%3Fdate_de_naissance.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fpeintre%20wdt%3AP19%20%3Flieu_de_naissance.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fpeintre%20wdt%3AP18%20%3Fimage.%20%7D%0A%7D%0ALIMIT%20100" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+    <i>Date du jour : 16/01/2024 </i>
+    <!-- Ajoutez ici le code HTML de la présentation du projet -->
+    <h2 style="text-align: center;">Equipe chargé du projet :</h2>
+    <div class="team-section" style="justify-content: center; align-items: center; display: flex;">
+        <table style="width: 40%;">
+            <tr>
+                <th><b>Nom</b></th>
+                <th><b>Master</b></th>
+            </tr>
+            <tr>
+                <td>Filali Boubrahmi Yassine</td>
+                <td>M2-NET</td>
+            </tr>
+            <tr>
+                <td>Nait Achabane Fouad</td>
+                <td>M2-NET</td>
+            </tr>
+            <tr>
+                <td>Saber El Mehdi</td>
+                <td>M2-THYP</td>
+            </tr>
+            <tr>
+                <td>Kadri Kenza</td>
+                <td>M2-THYP</td>
+            </tr>
+        </table>
     </div>
+    <h2><u><i>Exercice 1:</i></u></h2>
+    <i><b>Requete : </b></i>
+
+    <div style="border: 2px solid white; margin: 20px; display: inline-flex;">
+        <code style="margin: 10px;">
+            SELECT DISTINCT ?city ?cityLabel ?population ?country ?countryLabel ?coordinates <br>
+    WHERE <br>
+    { <br>
+      ?city wdt:P31/wdt:P279* wd:Q515;  # find instances of subclasses of city <br>
+            wdt:P1082 ?population;      # with a population <br>
+            wdt:P17 ?country;           # in a country <br>
+            wdt:P625 ?coordinates.      # with coordinates <br>
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } <br>
+    } <br>
+    ORDER BY DESC(?population) <br>
+    LIMIT 100 <br>
+        </code>
+    </div>
+    <h3>Data : </h3>
+    <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20%3Fnature_de_l_%C3%A9l%C3%A9mentLabel%20%3Fpopulation%20%3Fpays%20%3FpaysLabel%20%3Fcoordonn%C3%A9es_g%C3%A9ographiques%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20wdt%3AP31%20wd%3AQ515.%0A%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20wdt%3AP1082%20%3Fpopulation.%20%0A%20%20OPTIONAL%20%7B%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20wdt%3AP17%20%3Fpays.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20wdt%3AP625%20%3Fcoordonn%C3%A9es_g%C3%A9ographiques.%20%7D%0A%20%20%3Fnature_de_l_%C3%A9l%C3%A9ment%20wdt%3AP30%20wd%3AQ46.%0A%7D%0ALIMIT%20100" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+    <br>
+    <h3>Graphes : </h3>
+    <br>
+    <iframe style="margin-right: 24px;" width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0fVKRtWC7rhqhsvJQLwsEoc0lqpDUbsV3gxtTM5VoDKNzqzJnJklFgwyQpGmbvIiy2-EHZd7Z68hr/pubchart?oid=1486002877&amp;format=interactive"></iframe>
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0fVKRtWC7rhqhsvJQLwsEoc0lqpDUbsV3gxtTM5VoDKNzqzJnJklFgwyQpGmbvIiy2-EHZd7Z68hr/pubchart?oid=76042771&amp;format=interactive"></iframe>
+    
 </body>
 </html>
