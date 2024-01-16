@@ -1,5 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
+const Jimp = require('jimp')
 
 async function saveImagesFromSparqlQuery() {
     try {
@@ -44,4 +46,33 @@ async function saveImagesFromSparqlQuery() {
     }
 }
 
-saveImagesFromSparqlQuery();
+;
+
+async function createMosaic(images, mosaicWidth, mosaicHeight) {
+  // Load all images
+  const loadedImages = await Promise.all(images.map(image => Jimp.read(image)));
+
+  // Create a new image with the size of the mosaic
+  const mosaic = new Jimp(mosaicWidth * loadedImages[0].bitmap.width, mosaicHeight * loadedImages[0].bitmap.height);
+
+  // Add each image to the mosaic
+  for (let y = 0; y < mosaicHeight; y++) {
+    for (let x = 0; x < mosaicWidth; x++) {
+      const image = loadedImages[(y * mosaicWidth + x) % loadedImages.length];
+      mosaic.composite(image, x * image.bitmap.width, y * image.bitmap.height);
+    }
+  }
+
+  // Save the mosaic image
+  mosaic.write('mosaic.jpg');
+}
+
+// Get all image paths from the dogs folder
+const images = fs.readdirSync('dogs').map(file => path.join('dogs', file));
+
+// Calculate the width and height of the mosaic based on the number of images
+const mosaicWidth = Math.ceil(Math.sqrt(images.length));
+const mosaicHeight = Math.ceil(images.length / mosaicWidth);
+
+// Create the mosaic
+createMosaic(images, mosaicWidth, mosaicHeight);
