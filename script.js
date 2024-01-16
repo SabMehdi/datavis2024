@@ -15,6 +15,11 @@ async function saveImagesFromSparqlQuery() {
         GROUP BY ?dog_breed ?dog_breedLabel
       
         `;
+        const dir = './dogs';
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
         const response = await axios.get('https://query.wikidata.org/sparql', {
             params: {
                 query: sparqlQuery,
@@ -23,15 +28,15 @@ async function saveImagesFromSparqlQuery() {
         });
 
         // Save the images asynchronously
-        const imageUrls = response.data.results.bindings.map(binding => binding.image.value);
-        const savePromises = imageUrls.map(async imageUrl => {
+        const savePromises = response.data.results.bindings.map(async binding => {
+            const imageUrl = binding.image.value;
+            const dogBreedLabel = binding.dog_breedLabel.value;
             const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
             const imageBuffer = Buffer.from(imageResponse.data, 'binary');
-            const filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-            fs.writeFileSync(filename, imageBuffer);
+            const filename = `${dogBreedLabel}.jpg`;
+            fs.writeFileSync(`dogs/${filename}`, imageBuffer);
             console.log(`Saved ${filename}`);
         });
-
         await Promise.all(savePromises);
         console.log('All images saved successfully!');
     } catch (error) {
