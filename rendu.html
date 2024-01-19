@@ -14,13 +14,6 @@
             padding: 0;
         }
 
-        h1,
-        h2,
-        h3 {
-            margin: 0;
-            padding: 0;
-        }
-
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
@@ -95,6 +88,7 @@
 
         .graph-buttons {
             margin-top: 20px;
+            text-align: center;
         }
 
         .graph-button {
@@ -111,6 +105,12 @@
 
         .graph-button:hover {
             background-color: #524a8d;
+        }
+
+        .graph-description {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2em;
         }
 
         @keyframes fadeIn {
@@ -158,7 +158,7 @@
     <div class="project-presentation" style="margin-top: 80px; text-align: center;">
         <h2>Graphes :</h2>
     </div>
-    <div class="graph-buttons" style="text-align: center;">
+    <div class="graph-buttons">
         <button class="graph-button" onclick="showGraph('graph1')">Graphe 1</button>
         <button class="graph-button" onclick="showGraph('graph2')">Graphe 2</button>
         <button class="graph-button" onclick="showGraph('graph3')">Graphe 3</button>
@@ -166,18 +166,19 @@
     <div class="graphs-section">
         <div class="graph-container" id="graph1">
             <img src="images/barcode.png" alt="Graph 1" class="graph-image">
+            <p class="graph-description">Description du Graph 1.</p>
         </div>
 
         <div class="graph-container" id="graph2">
             <img src="images/plot.png" alt="Graph 2" class="graph-image">
+            <p class="graph-description">Description du Graph 2.</p>
         </div>
 
         <div class="graph-container" id="graph3">
             <img src="images/montage (1).png" alt="Graph 3" class="graph-image">
+            <p class="graph-description">Description du Graph 3.</p>
         </div>
     </div>
-
-    
 
     <script>
         function showGraph(graphId) {
