@@ -3,11 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        body {
+            background-image: url('images/abstrait-numerique-grille-fond-noir.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            font-family: 'Futura', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #fff;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #302b63;
+        }
+
+        tr:nth-child(even) {
+            background-color: #24243e;
+        }
+
+        .graphs-section {
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .graph-container {
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: box-shadow 0.3s ease-in-out;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .graph-container:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .graph-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .graph-buttons {
+            margin-top: 20px;
+        }
+
+        .graph-button {
+            background-color: #302b63;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-right: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .graph-button:hover {
+            background-color: #524a8d;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <title>Rendu Final</title>
 </head>
+
 <body>
-    <h1>Rendu final </h1>
-    <h2 style="text-align: center;">Equipe chargé du projet :</h2>
+    <div style="text-align: center; font-size: 55px; font-weight: bold; text-decoration: underline; margin-bottom: 100px;">Rendu Final :</div>
+    <h2 style="text-align: center;">Equipe chargée du projet :</h2>
     <div class="team-section" style="justify-content: center; align-items: center; display: flex;">
         <table style="width: 40%;">
             <tr>
@@ -33,5 +149,47 @@
 
         </table>
     </div>
+
+    <div style="text-align: center; margin-top: 100px;">
+        <h2>Présentation du projet :</h2>
+        <p>Le projet consiste à créer une application web qui permet de gérer les projets de l'entreprise. L'application doit permettre de créer des projets, d'ajouter des tâches à ces projets, d'ajouter des collaborateurs à ces projets et de gérer les tâches de chaque collaborateur.</p>
+    </div>
+
+    <div class="project-presentation" style="margin-top: 80px; text-align: center;">
+        <h2>Graphes :</h2>
+    </div>
+    <div class="graph-buttons" style="text-align: center;">
+        <button class="graph-button" onclick="showGraph('graph1')">Graphe 1</button>
+        <button class="graph-button" onclick="showGraph('graph2')">Graphe 2</button>
+        <button class="graph-button" onclick="showGraph('graph3')">Graphe 3</button>
+    </div>
+    <div class="graphs-section">
+        <div class="graph-container" id="graph1">
+            <img src="images/barcode.png" alt="Graph 1" class="graph-image">
+        </div>
+
+        <div class="graph-container" id="graph2">
+            <img src="images/plot.png" alt="Graph 2" class="graph-image">
+        </div>
+
+        <div class="graph-container" id="graph3">
+            <img src="images/montage (1).png" alt="Graph 3" class="graph-image">
+        </div>
+    </div>
+
+    
+
+    <script>
+        function showGraph(graphId) {
+            // Cacher tous les graphes
+            document.getElementById('graph1').style.display = 'none';
+            document.getElementById('graph2').style.display = 'none';
+            document.getElementById('graph3').style.display = 'none';
+
+            // Afficher le graphe demandé
+            document.getElementById(graphId).style.display = 'block';
+        }
+    </script>
+    
 </body>
 </html>
